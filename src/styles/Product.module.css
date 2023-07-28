@@ -1,0 +1,9 @@
+/* Color For Stars */
+.iconColor {
+  color: gold;
+}
+/* Rating number text color */
+.rating {
+  color: #b4690e;
+  font-weight: bold;
+}
