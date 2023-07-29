@@ -1,13 +1,20 @@
 import RootLayout from "@/components/layouts/RootLayout";
+import Categories from "@/components/ui/Categories";
 import Products from "@/components/ui/Products";
 
 
 const HomePage = () => {
   return (
     <div>
-      <h1 className="text-center text-6xl mt-4">Featured Products</h1>
       <div className="container mx-auto">
-        <Products />
+        <div className="mt-20">
+          <h1 className="text-center text-6xl">Featured Products</h1>
+          <Products />
+        </div>
+        <div className="my-20">
+          <h1 className="text-center text-6xl mt-4">Featured Categories</h1>
+          <Categories />
+        </div>
       </div>
     </div>
   );
