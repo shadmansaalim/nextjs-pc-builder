@@ -16,9 +16,10 @@ async function bootstrap(req, res) {
         await client.connect();
         const productsCollection = client.db('next-pc-builder').collection('products');
 
-        const productId = req?.params?.productId;
-        const category = req?.params?.category;
+        const productId = req?.query?.productId;
+        const category = req?.query?.category;
         const limit = parseInt(req.query.limit, 10) || 0;
+
 
         if (req.method === 'GET' && productId) {
             const product = await productsCollection.findOne({
