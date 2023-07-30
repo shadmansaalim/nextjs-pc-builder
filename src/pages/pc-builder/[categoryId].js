@@ -1,7 +1,21 @@
 import Product from '@/components/ui/Product';
+import { addProduct, setComponents } from '@/redux/features/components/componentSlice';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const CategoryDetailsPage = ({ category, categoryProducts }) => {
+    const dispatch = useDispatch();
+    const { components } = useSelector(state => state.component);
+
+    const router = useRouter();
+
+    const handleAddToBuilder = (product) => {
+        dispatch(addProduct(product));
+        router.push('/pc-builder')
+    }
+
     return (
         <div className="my-20 mx-10">
             <div className="card bg-white shadow-xl">
@@ -20,6 +34,7 @@ const CategoryDetailsPage = ({ category, categoryProducts }) => {
                             key={product._id}
                             product={product}
                             builderButton={true}
+                            handleAddToBuilder={handleAddToBuilder}
                         />)
                     }
                 </div>
