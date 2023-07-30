@@ -30,11 +30,8 @@ const CategoryDetailsPage = ({ category, categoryProducts }) => {
 export default CategoryDetailsPage;
 
 export const getStaticPaths = async () => {
-    if (typeof window === 'undefined') {
-        return { paths: [], fallback: false }
-    }
 
-    const res = await fetch(`${process.env.URL}/api/categories`);
+    const res = await fetch(`https://nextjs-pc-builder-inky.vercel.app/api/categories`);
     const categories = await res.json();
 
 
@@ -46,15 +43,6 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-
-    if (typeof window === 'undefined') {
-        return {
-            props: {
-                category: [],
-                categoryProducts: []
-            }
-        }
-    }
 
 
     const { params } = context;

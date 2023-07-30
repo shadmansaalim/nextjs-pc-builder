@@ -4,6 +4,8 @@ import Products from "@/components/ui/Products";
 
 
 const HomePage = ({ products, categories }) => {
+  console.log(products, categories);
+
   return (
     <div>
       <div className="container mx-auto">
@@ -27,20 +29,10 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-
-  if (typeof window === 'undefined') {
-    return {
-      props: {
-        products: [],
-        categories: []
-      },
-    };
-  }
-
   // Requirement says to fetch random 6 products
   const limit = 6;
 
-  let res = await fetch(`${process.env.URL}/api/products?limit=${limit}`)
+  let res = await fetch(`https://nextjs-pc-builder-inky.vercel.app/api/products?limit=${limit}`)
   const products = await res.json();
 
   res = await fetch(`${process.env.URL}/api/categories`);

@@ -45,7 +45,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">PC Builder</a>
+                <a href="https://nextjs-pc-builder-inky.vercel.app/pc-builder" className="btn">PC Builder</a>
             </div>
         </div>
     );

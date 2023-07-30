@@ -58,11 +58,8 @@ const ProductDetailsPage = ({ product }) => {
 export default ProductDetailsPage;
 
 export const getStaticPaths = async () => {
-    if (typeof window === 'undefined') {
-        return { paths: [], fallback: false }
-    }
 
-    const res = await fetch(`${process.env.URL}/api/products`);
+    const res = await fetch(`https://nextjs-pc-builder-inky.vercel.app/api/products`);
     const products = await res.json();
 
 
@@ -75,17 +72,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
 
-    if (typeof window === 'undefined') {
-        return {
-            props: {
-                product: []
-            }
-        };
-    }
-
 
     const { params } = context;
-    const res = await fetch(`${process.env.URL}/api/products?productId=${params.productId}`);
+    const res = await fetch(`https://nextjs-pc-builder-inky.vercel.app/api/products?productId=${params.productId}`);
     const data = await res.json();
 
     return {

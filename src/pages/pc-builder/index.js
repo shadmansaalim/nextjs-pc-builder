@@ -58,7 +58,7 @@ PCBuilderPage.getLayout = function getLayout(page) {
 };
 
 export const getServerSideProps = async () => {
-    const res = await fetch(`${process.env.URL}/api/categories`)
+    const res = await fetch(`https://nextjs-pc-builder-inky.vercel.app/api/categories`)
     const categories = await res.json();
 
     return {
