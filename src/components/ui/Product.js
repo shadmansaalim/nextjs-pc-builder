@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 
-const Product = ({ product }) => {
+const Product = ({ product, builderButton }) => {
     return (
         <Link href={`/products/${product?._id}`}>
             <div className="card w-96 bg-white shadow-xl" style={{ cursor: 'pointer' }}>
@@ -29,6 +29,13 @@ const Product = ({ product }) => {
                             readonly
                         />
                     </div>
+                    {
+                        builderButton
+                        &&
+                        <div className="mt-2">
+                            <button className="btn btn-primary">Add To Builder</button>
+                        </div>
+                    }
                 </div>
             </div>
         </Link>

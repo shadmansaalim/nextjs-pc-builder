@@ -19,6 +19,7 @@ const CategoryDetailsPage = ({ category, categoryProducts }) => {
                         categoryProducts.map(product => <Product
                             key={product._id}
                             product={product}
+                            builderButton={true}
                         />)
                     }
                 </div>
