@@ -30,7 +30,11 @@ const CategoryDetailsPage = ({ category, categoryProducts }) => {
 export default CategoryDetailsPage;
 
 export const getStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/categories");
+    if (typeof window === 'undefined') {
+        return { paths: [], fallback: false }
+    }
+
+    const res = await fetch(`${process.env.URL}/api/categories`);
     const categories = await res.json();
 
 
@@ -42,11 +46,22 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
+
+    if (typeof window === 'undefined') {
+        return {
+            props: {
+                category: [],
+                categoryProducts: []
+            }
+        }
+    }
+
+
     const { params } = context;
-    let res = await fetch(`http://localhost:3000/api/categories?categoryId=${params.categoryId}`);
+    let res = await fetch(`${process.env.URL}/api/categories?categoryId=${params.categoryId}`);
     const category = await res.json();
 
-    res = await fetch(`http://localhost:3000/api/products?category=${category.data.name}`);
+    res = await fetch(`${process.env.URL}/api/products?category=${category.data.name}`);
     const products = await res.json();
 
     return {

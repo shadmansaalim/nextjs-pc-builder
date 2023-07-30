@@ -58,7 +58,11 @@ const ProductDetailsPage = ({ product }) => {
 export default ProductDetailsPage;
 
 export const getStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/products");
+    if (typeof window === 'undefined') {
+        return { paths: [], fallback: false }
+    }
+
+    const res = await fetch(`${process.env.URL}/api/products`);
     const products = await res.json();
 
 
@@ -70,8 +74,18 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
+
+    if (typeof window === 'undefined') {
+        return {
+            props: {
+                product: []
+            }
+        };
+    }
+
+
     const { params } = context;
-    const res = await fetch(`http://localhost:3000/api/products?productId=${params.productId}`);
+    const res = await fetch(`${process.env.URL}/api/products?productId=${params.productId}`);
     const data = await res.json();
 
     return {

@@ -27,13 +27,23 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
+
+  if (typeof window === 'undefined') {
+    return {
+      props: {
+        products: [],
+        categories: []
+      },
+    };
+  }
+
   // Requirement says to fetch random 6 products
   const limit = 6;
 
-  let res = await fetch(`http://localhost:3000/api/products?limit=${limit}`)
+  let res = await fetch(`${process.env.URL}/api/products?limit=${limit}`)
   const products = await res.json();
 
-  res = await fetch(`http://localhost:3000/api/categories`);
+  res = await fetch(`${process.env.URL}/api/categories`);
   const categories = await res.json();
 
   return {
