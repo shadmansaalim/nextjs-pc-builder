@@ -3,8 +3,7 @@ import Categories from "@/components/ui/Categories";
 import Products from "@/components/ui/Products";
 
 
-const HomePage = ({ products }) => {
-  console.log(products);
+const HomePage = ({ products, categories }) => {
   return (
     <div>
       <div className="container mx-auto">
@@ -14,7 +13,7 @@ const HomePage = ({ products }) => {
         </div>
         <div className="my-20">
           <h1 className="text-center text-6xl mt-4">Featured Categories</h1>
-          <Categories />
+          <Categories categories={categories} />
         </div>
       </div>
     </div>
@@ -30,13 +29,19 @@ HomePage.getLayout = function getLayout(page) {
 export const getStaticProps = async () => {
   // Requirement says to fetch random 6 products
   const limit = 6;
-  const res = await fetch(`http://localhost:3000/api/products?limit=${limit}`)
-  const data = await res.json();
+
+  let res = await fetch(`http://localhost:3000/api/products?limit=${limit}`)
+  const products = await res.json();
+
+  res = await fetch(`http://localhost:3000/api/categories`);
+  const categories = await res.json();
 
   return {
     props: {
-      products: data.data
+      products: products.data,
+      categories: categories.data
     },
     revalidate: 10
   };
 }
+
